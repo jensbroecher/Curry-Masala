@@ -8,6 +8,8 @@ body {
 	text-align: center;
 	margin: 0px;
 	padding: 0px;
+	background-color: black;
+	height: 100%;
 }
 .start {
 	background-image: url(../img/bg.jpg);

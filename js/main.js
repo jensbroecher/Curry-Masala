@@ -25,7 +25,7 @@ function card() {
 	document.getElementById("account").style.display = "none";
 	
 	$( "#card" ).load( "http://curry-masala.de/app_admin/card.php", function() {
-  	alert( "Load was performed." );
+  	
 	});
 }
     
