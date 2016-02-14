@@ -20,6 +20,16 @@ body {
 	left: 0px;
 	display: none;
 }
+.kategorie {
+	width: 44%;
+	height: 100px;
+	margin-left: 4%;
+	margin-bottom: 20px;
+	background-color: white;
+	box-shadow: 0 0 3px 1px rgba(0,0,0,0.5);
+	display: block;
+	float: left;
+}
 .start {
 	background-image: url(../img/bg.jpg);
 	background-repeat: no-repeat;
@@ -78,6 +88,16 @@ body {
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
+}
+#navigation {
+	background-color: rgba(234, 155, 20, 0.78);
+	height: 40px;
+	margin-bottom: 20px;
+	text-align: left;
+	text-indent: 5px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
 }
 #signin {
 	display: none;

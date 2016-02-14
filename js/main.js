@@ -46,6 +46,7 @@ function card() {
 	
 	document.body.className = "card";
 	document.getElementById("account").style.display = "none";
+	document.getElementById("card").style.display = "block";
 		
 	}, 1000);
 	
@@ -53,7 +54,7 @@ function card() {
 	hideloader();
 	}, 2000);
 	
-	$( "#card" ).load( "http://curry-masala.de/app_admin/card.php", function() {
+	$( "#cardcontent" ).load( "http://curry-masala.de/app_admin/card.php?task=start", function() {
   	
 	});
 	
