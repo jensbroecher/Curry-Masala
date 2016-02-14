@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+	
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link href="css/animate.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
+    
+<script src="js/jquery.min.js"></script>
+<script src="js/main.js"></script>
+<script src="cordova.js"></script>
+
+</head>
+
+<body class="start">
+	
+<div id="card"></div>
+	
+<div id="start_overlay" onclick="account();"></div>
+  
+<div id="start_logo_account" class="animated fadeIn" style="-webkit-animation-delay: 1s">
+	
+<div id="logo">
+<img class="animated fadeInLeft" style="-webkit-animation-delay: 2s" id="curry" src="img/curry.png">
+<img class="animated fadeInUp" style="-webkit-animation-delay: 2s" id="masala" src="img/masala.png">
+<img class="animated fadeIn" style="-webkit-animation-delay: 3s" id="fresh_south_indian_kitchen" src="img/fresh_south_indian_kitchen.png">
+</div>
+
+<div id="account">
+<img id="welcome" src="img/welcome.png">
+<button onclick="card();">Ich bestelle zum ersten Mal</button>
+<button onclick="signin();">Ich habe bereits bestellt</button>
+</div>
+
+<div id="signin">
+<input placeholder="E-Mail">
+<input type="tel" placeholder="PIN" maxlength="4" pattern=".{4,}">
+<button>OK</button>
+<button onclick="location.reload();">Abbrechen</button>
+</div>
+
+</div>
+
+</body>
+</html>

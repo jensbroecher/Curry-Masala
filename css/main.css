@@ -1,0 +1,115 @@
+html {
+	width: 100%;
+	height: 100%;
+}
+body {
+	font-family: Roboto, sans-serif;
+	font-size: 18px;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+.start {
+	background-image: url(../img/bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+.account {
+	background-image: url(../img/bg2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+.signin {
+	background-image: url(../img/bg3.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+.card {
+	background-image: url(../img/white.jpg);
+	background-size: 300px 300px;
+	background-position: center center;
+}
+#start_overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: 100;
+}
+#start_logo_account {
+	margin-top: 60%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+#masala {
+	margin-top: -37px;
+	position: relative;
+}
+#curry {
+	margin-right: -30px;
+	position: relative;
+}
+#fresh_south_indian_kitchen {
+	margin-top: -25px;
+	position: relative;
+	width: 90%;
+}
+#account {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: none;
+	color: #E4C41F;
+}
+#welcome {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+#signin {
+	display: none;
+}
+#card {
+	display: none;
+}
+button {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
+	background-color: rgba(224, 193, 113, 0.74);
+	padding-top: 7px;
+	padding-bottom: 7px;
+	color: black;
+	border: none;
+	font-size: 16px;
+}
+button:hover {
+	background-color: #ead398;
+}
+input {
+	font-size: 16px;
+	color: #E4C41F;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: rgba(228, 196, 31, 0.4);
+	line-height: 180%;
+	padding-left: 1%;
+	padding-right: 1%;
+	border: none;
+	width: 98%;
+}
+::-webkit-input-placeholder {
+    color:    #E4C41F;
+}
+:-moz-placeholder {
+    color:    #E4C41F;
+}
+::-moz-placeholder {
+    color:    #E4C41F;
+}
+:-ms-input-placeholder {
+    color:    #E4C41F;
+}
+:focus {outline:none;}

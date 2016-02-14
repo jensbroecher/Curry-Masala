@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "de.eatfair.currymasala"
+        versionCode = "1" 
+        version     = "1.0.0" >
+
+    <name>Curry Masala</name>
+
+    <description>
+		Einfach und schnell leckeres bei Curry Masala bestellen.
+    </description>
+
+    <author href="https://www.jthglobal.com" email="jensbroecher@gmail.com">
+        JTH / ICS Software Development
+    </author>
+	
+	<icon src="icon.png" />
+		
+	<!-- Core plugins -->
+    <gap:plugin name="cordova-plugin-device" source="npm" />
+    <gap:plugin name="cordova-plugin-device-orientation" source="npm" />
+    <gap:plugin name="cordova-plugin-dialogs" source="npm" />
+    <gap:plugin name="cordova-plugin-file" source="npm" />
+    <gap:plugin name="cordova-plugin-file-transfer" source="npm" />
+    <gap:plugin name="cordova-plugin-geolocation" source="npm" />
+    <gap:plugin name="cordova-plugin-inappbrowser" source="npm" />
+    <gap:plugin name="cordova-plugin-media" source="npm" />
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
+    
+    <gap:plugin name="cordova-plugin-screen-orientation" source="npm" />
+
+    <gap:plugin name="onesignal-cordova-plugin-pgb-compat" source="npm" />
+    <gap:plugin name="cordova-plugin-googleplayservices" source="npm" />
+    <gap:plugin name="cordova-plugin-android-support-v4" source="npm" />
+        
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+    <access origin="*" />
+
+</widget>
