@@ -55,7 +55,7 @@ function card() {
 	}, 2000);
 	
 	$( "#cardcontent" ).load( "http://curry-masala.de/app_admin/card.php?task=start", function() {
-  	
+  		location.href = "#karte";
 	});
 	
 }

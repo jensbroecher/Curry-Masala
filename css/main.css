@@ -21,6 +21,8 @@ body {
 	display: none;
 }
 .kategorie {
+	background-size: cover;
+	background-position: center center;
 	width: 44%;
 	height: 100px;
 	margin-left: 4%;
@@ -29,6 +31,25 @@ body {
 	box-shadow: 0 0 3px 1px rgba(0,0,0,0.5);
 	display: block;
 	float: left;
+}
+.speise {
+	margin-left: 4%;
+	margin-right: 4%;
+	margin-bottom: 10px;
+	background-color: white;
+	box-shadow: 0 0 3px 1px rgba(0,0,0,0.5);
+	display: block;
+}
+.kategorie div {
+	height: 20px;
+	width: 100%;
+	margin-top: 80px;
+	font-size: 14px;
+	background-color: rgba(255, 255, 255, 0.77);
+	line-height: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	clip: auto;
 }
 .start {
 	background-image: url(../img/bg.jpg);
@@ -50,8 +71,9 @@ body {
 }
 .card {
 	background-image: url(../img/white.jpg);
-	background-size: 300px 300px;
+	background-size: 200px 200px;
 	background-position: center center;
+	background-attachment: fixed;
 }
 #start_overlay {
 	position: absolute;
@@ -91,19 +113,34 @@ body {
 }
 #navigation {
 	background-color: rgba(234, 155, 20, 0.78);
-	height: 40px;
-	margin-bottom: 20px;
-	text-align: left;
-	text-indent: 5px;
 	position: fixed;
 	top: 0px;
+	height: 45px;
 	width: 100%;
+}
+#navigation_menu_btn {
+	padding: 10px;
+	float: left;
+	display: block;
+}
+#navigation_cart_btn {
+	padding: 10px;
+	float: right;
+	display: block;
+}
+#navigation_menu_btn svg {
+	
 }
 #signin {
 	display: none;
 }
 #card {
 	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	padding-top: 60px;
 }
 button {
 	margin-top: 10px;
