@@ -69,11 +69,27 @@ body {
 	background-size: cover;
 	background-position: center center;
 }
+.speiseinnen {
+	padding: 5px;
+	font-size: 14px;
+}
 .card {
 	background-image: url(../img/white.jpg);
 	background-size: 200px 200px;
-	background-position: center center;
-	background-attachment: fixed;
+}
+.plu {
+	float: left;
+	padding: 3px;
+	color: white;
+	background-color: #8CB03B;
+	margin-right: 3px;
+}
+.speisenname {
+
+}
+.preis {
+	float: right;
+	font-weight: bold;
 }
 #start_overlay {
 	position: absolute;
@@ -117,6 +133,7 @@ body {
 	top: 0px;
 	height: 45px;
 	width: 100%;
+	z-index: 100;
 }
 #navigation_menu_btn {
 	padding: 10px;
