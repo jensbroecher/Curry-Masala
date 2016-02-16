@@ -82,10 +82,11 @@ body {
 	padding: 3px;
 	color: white;
 	background-color: #8CB03B;
-	margin-right: 3px;
+	margin-right: 5px;
 }
 .speisenname {
-
+	text-align: left;
+	margin-left: 5px;
 }
 .preis {
 	float: right;
