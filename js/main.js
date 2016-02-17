@@ -9,6 +9,22 @@ document.getElementById("loadingindicator").className = "animated fadeIn";
 document.getElementById("loadingindicator").style.display = "block";
 }
 
+function addcart() {
+	
+	var speise = localStorage.getItem("speise");
+	
+	$("#addcart").load("http://curry-masala.de/app_admin/addcard.php?itemid="+speise+"", function(responseTxt, statusTxt, xhr) {
+    	document.getElementById("addcart").style.height = "40%";
+		document.getElementById("addcartbutton").style.height = "50px";
+		document.getElementById("cardcontent").className = "blur";
+    });
+}
+function closecart() {
+    	document.getElementById("addcart").style.height = "0%";
+		document.getElementById("addcartbutton").style.height = "0%";
+		document.getElementById("cardcontent").className = "noblur";
+}
+
 function account() {
 	showloader();
 	
