@@ -54,17 +54,19 @@ function card() {
 	hideloader();
 	}, 2000);
 	
-	$( "#cardcontent" ).load( "http://curry-masala.de/app_admin/card.php?task=start", function() {
-  		location.href = "#karte";
-	});
+	
+  	location.href = "#karte";
 	
 }
     
 $(document).ready(function() {
+	
+	location.href = "#start";
+	
     var rememberuser = localStorage.getItem('rememberuser');
 
     if (rememberuser == 'Yes') {
-       
+     	location.href = "#karte";  
     }
     else {
 
@@ -101,5 +103,30 @@ function hideloader() {
 	document.getElementById("transition").className = "animated fadeOut";
 	setTimeout(function(){ 
 		document.getElementById("transition").style.display = "none";
-	}, 1000);
+	}, 800);
 }
+
+
+var hash = false;
+        checkHash();
+
+        function checkHash() {
+            if (window.location.hash != hash) {
+                hash = window.location.hash;
+                processHash(hash);
+            }
+            t = setTimeout("checkHash()", 200);
+        }
+
+        function processHash(hash) {
+			if (hash == "#karte") {
+				
+                $("html, body").animate({
+                    scrollTop: 0
+                }, "slow");
+               
+                $("#cardcontent").load("http://curry-masala.de/app_admin/card.php?task=start", function(responseTxt, statusTxt, xhr) {
+                   
+                });
+            }
+		}
