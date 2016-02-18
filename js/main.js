@@ -17,6 +17,7 @@ function addcart() {
     	document.getElementById("addcart").style.height = "40%";
 		document.getElementById("addcartbutton").style.height = "50px";
 		document.getElementById("addcartbutton").className = "animated fadeIn";
+		
 		document.getElementById("cardcontent").className = "blur";
     });
 }
