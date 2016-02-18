@@ -244,6 +244,8 @@ button {
 }
 #speisenname_addcart {
 	background-color: white;
+	white-space: nowrap;
+	overflow: auto;
 	line-height: 35px;
 	color: black;
 	border-radius: 8px;
@@ -255,11 +257,14 @@ button {
 	user-select: none;
 	margin-left: 20px;
 	margin-right: 20px;
+	padding-left: 4px;
+	padding-right: 4px;
 	margin-top: 50px;
 }
 .blur {
 	-webkit-transform: scale(0.95);
     transform: scale(0.95);
+	transform-origin: center top;
 	transition: all 1s;
 	pointer-events: none;
 }

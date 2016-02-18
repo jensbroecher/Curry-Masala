@@ -14,7 +14,7 @@ function addcart() {
 	var speise = localStorage.getItem("speise");
 	
 	$("#addcart").load("http://curry-masala.de/app_admin/addcard.php?itemid="+speise+"", function(responseTxt, statusTxt, xhr) {
-    	document.getElementById("addcart").style.height = "40%";
+    	document.getElementById("addcart").style.height = "50%";
 		document.getElementById("addcartbutton").style.height = "50px";
 		document.getElementById("addcartbutton").className = "animated fadeIn";
 		
