@@ -11,6 +11,8 @@ document.getElementById("loadingindicator").style.display = "block";
 
 function addcart() {
 	
+	localStorage.setItem("cartopen","Yes");
+	
 	var speise = localStorage.getItem("speise");
 	
 	$("#addcart").load("http://curry-masala.de/app_admin/addcard.php?itemid="+speise+"", function(responseTxt, statusTxt, xhr) {
@@ -26,6 +28,34 @@ function closecart() {
 		document.getElementById("addcartbutton").style.height = "0%";
 		document.getElementById("addcartbutton").className = "";
 		document.getElementById("cardcontent").className = "noblur";
+	
+		localStorage.setItem("cartopen","No");
+}
+
+function opennav() {
+	
+	swal.close();
+	
+	var cartopen = localStorage.getItem('cartopen');
+
+    if (cartopen == 'Yes') {
+     	closecart();
+    }
+	
+	document.getElementById("sidenav").style.marginLeft = "0px";
+	document.getElementById("navoverlay").style.display = "block";
+	document.getElementById("navigation_menu_btn").style.display = "none";
+	document.getElementById("navigation_menu_btn_close").style.display = "block";
+	$("body").bind("touchmove", function(e){e.preventDefault()});
+	$("body").addClass("stop-scrolling");
+}
+function closenav() {
+	document.getElementById("sidenav").style.marginLeft = "-400px";
+	document.getElementById("navoverlay").style.display = "none";
+	document.getElementById("navigation_menu_btn").style.display = "block";
+	document.getElementById("navigation_menu_btn_close").style.display = "none";
+	$("body").unbind("touchmove");
+	$("body").removeClass("stop-scrolling");
 }
 
 function account() {

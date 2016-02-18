@@ -166,6 +166,11 @@ body {
 	padding: 10px;
 	float: left;
 }
+#navigation_menu_btn_close {
+	padding: 10px;
+	float: left;
+	display: none;
+}
 #navigation_cart_btn {
 	padding: 10px;
 	float: right;
@@ -212,13 +217,44 @@ padding-top: 3px;
 padding-bottom: 0px;
 margin-bottom: 2px;
 }
+nav {
+	padding-top: 70px;
+	position: absolute;
+	background-image: url(../img/bg2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 80%;
+	max-width: 400px;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	margin-left: -400px;
+	transition: all 1s;
+	z-index: 99;
+}
+#navoverlay {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	z-index: 98;
+	display: none;
+}
+nav div {
+	background-color: rgba(138, 64, 4, 0.84);
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+	text-indent: 10px;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
 #shoppingcarttotal {
 	text-align: right;
 	padding-top: 5px;
 	padding-bottom: 5px;
-}
-#navigation_menu_btn svg {
-	
 }
 #signin {
 	display: none;
