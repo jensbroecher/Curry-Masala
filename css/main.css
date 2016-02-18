@@ -258,14 +258,12 @@ button {
 	margin-top: 50px;
 }
 .blur {
-	filter: blur(10px);
-	-webkit-filter: blur(10px);
+	-webkit-transform: scale(0.95);
+    transform: scale(0.95);
 	transition: all 1s;
 	pointer-events: none;
 }
 .noblur {
-	filter: blur(0px);
-	-webkit-filter: blur(0px);
 	transition: all 1s;
 }
 #addcartbutton {
