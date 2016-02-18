@@ -165,12 +165,57 @@ body {
 #navigation_menu_btn {
 	padding: 10px;
 	float: left;
-	display: block;
 }
 #navigation_cart_btn {
 	padding: 10px;
 	float: right;
 	display: none;
+}
+#shoppingcartlist {
+	margin:10px;
+}
+#shoppingcart {
+
+}
+.warenkorbprodukt .warenkorbname, .warenkorbprodukt .warenkorbanzahl, .warenkorbprodukt .warenkorbpreis {
+display: block;
+float: left;
+background-color: white;
+padding-top: 7px;
+padding-bottom: 7px;
+margin-bottom: 2px;
+font-size: 15px;
+white-space: nowrap;
+overflow: hidden;
+}
+.warenkorbname {
+width: 60%;
+text-align: left;
+text-indent: 5px;
+}
+.warenkorbanzahl {
+width: 10%;
+display: block;
+float: left;
+}
+.warenkorbpreis {
+width: 20%;
+display: block;
+float: left;
+}
+.warenkorbtonne {
+width: 10%;
+display: block;
+float: left;
+background-color: white;
+padding-top: 3px;
+padding-bottom: 0px;
+margin-bottom: 2px;
+}
+#shoppingcarttotal {
+	text-align: right;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 #navigation_menu_btn svg {
 	

@@ -57,6 +57,10 @@ function signin() {
 	hideloader();
 	}, 2000);
 }
+function closeshoppingcart() {
+	document.getElementById("shoppingcart").style.display = "none";
+	document.getElementById("cardcontent").style.display = "block";
+}
 function card() {
 	
 	showloader();
@@ -77,6 +81,24 @@ function card() {
   	location.href = "#karte";
 	
 }
+
+
+
+
+function checkout() {
+	swal({   
+		title: "Bezahlart wählen",
+		text: "<button>PayPal</button><button>Bargeld</button>",
+		html: true,
+		showConfirmButton: true,
+		confirmButtonText: "Zurück",
+		confirmButtonColor: "#EEB147"
+	});
+}
+
+
+
+
     
 $(document).ready(function() {
 	
