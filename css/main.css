@@ -170,7 +170,7 @@ body {
 #navigation_cart_btn {
 	padding: 10px;
 	float: right;
-	display: block;
+	display: none;
 }
 #navigation_menu_btn svg {
 	
