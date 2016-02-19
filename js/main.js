@@ -113,9 +113,18 @@ function card() {
 }
 
 
-
-
 function checkout() {
+	document.getElementById("shoppingcart").style.display = "none";
+	document.getElementById("checkout").style.display = "block";
+	
+	$( "#checkout" ).load( "http://curry-masala.de/app_admin/checkout.php", function() {
+  		
+	});
+}
+
+
+
+function payoptions() {
 	swal({   
 		title: "Bezahlart wählen",
 		text: "<button>PayPal</button><button>Bargeld</button>",
