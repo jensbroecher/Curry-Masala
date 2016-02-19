@@ -174,7 +174,6 @@ body {
 #navigation_cart_btn {
 	padding: 10px;
 	float: right;
-	display: none;
 }
 #shoppingcartlist {
 	margin:10px;
@@ -296,8 +295,8 @@ nav div {
  	transform: translate3d(0,0,0);
 }
 button {
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 15px;
+	margin-bottom: 0px;
 	width: 100%;
 	background-color: rgba(224, 193, 113, 0.74);
 	padding-top: 10px;
@@ -414,6 +413,30 @@ input{
 	margin-top: 60px;
 	margin-left: 10px;
 	margin-right: 10px;
+}
+#vatnote, #lieferzeithinweis, #terms {
+	font-size: 14px;
+}
+#lieferzeithinweis {
+	clear: both;
+	padding: 10px;
+	background-color: rgba(255, 255, 255, 0.76);
+}
+#terms {
+	clear: both;
+	padding: 10px;
+	background-color: rgba(255, 255, 255, 0.76);
+}
+#terms {
+	clear: both;
+	padding: 10px;
+	background-color: rgba(255, 255, 255, 0.76);
+	margin-bottom: 5px;
+}
+.checkout_checkbox {
+	width: 20px;
+	height: 20px;
+	float: left;
 }
 .checkout_input{
 	font-size: 16px;

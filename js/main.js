@@ -114,6 +114,16 @@ function card() {
 
 
 function checkout() {
+	
+	var shoppingcarttotal = document.getElementById("shoppingcarttotal").innerHTML;
+	
+	if (shoppingcarttotal == "0.00€") {
+		sweetAlert("Warenkorb leer", "", "info");
+		closeshoppingcart();
+		return;
+	}
+	
+	
 	document.getElementById("shoppingcart").style.display = "none";
 	document.getElementById("checkout").style.display = "block";
 	
@@ -122,21 +132,21 @@ function checkout() {
 	});
 }
 
-
-
 function payoptions() {
-	swal({   
-		title: "Bezahlart wählen",
-		text: "<button>PayPal</button><button>Bargeld</button>",
-		html: true,
-		showConfirmButton: true,
-		confirmButtonText: "Zurück",
-		confirmButtonColor: "#EEB147"
+	
+	var vorname = document.getElementById("vorname").value; localStorage.setItem("vorname",vorname);
+	var nachname = document.getElementById("nachname").value; localStorage.setItem("nachname",nachname);
+	var strasse = document.getElementById("strasse").value; localStorage.setItem("strasse",strasse);
+	var telefon = document.getElementById("telefon").value; localStorage.setItem("telefon",telefon);
+	var email = document.getElementById("email").value; localStorage.setItem("email",email);
+	var firma = document.getElementById("firma").value; localStorage.setItem("firma",firma);
+	var plz = document.getElementById("plz").value; localStorage.setItem("plz",plz);
+	var hinweise = document.getElementById("hinweise").value; localStorage.setItem("hinweise",hinweise);
+	
+	$( "#checkout" ).load( "http://curry-masala.de/app_admin/payoptions.php", function() {
+  		
 	});
 }
-
-
-
 
     
 $(document).ready(function() {
@@ -210,3 +220,257 @@ var hash = false;
                 });
             }
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function plus() {
+	
+	var plusminuscount = document.getElementById("plusminuscount").innerHTML;
+	
+	if (plusminuscount == "30") {
+		return;
+	}
+	
+	var addcart_preis = document.getElementById("addcart_preis").innerHTML;
+	var addcart_preis = parseFloat(addcart_preis);
+
+	var addcart_preis_start = localStorage.getItem("addcart_preis_start");
+	var addcart_preis_start = parseFloat(addcart_preis_start);
+	var addcart_preis_out = addcart_preis + addcart_preis_start;
+	
+	var addcart_preis_out = addcart_preis_out.toFixed(2);
+
+	document.getElementById("addcart_preis").innerHTML = addcart_preis_out;
+	
+	
+	
+	
+	var plusminuscount = parseInt(plusminuscount);
+	
+	var plusminuscount = plusminuscount + 1;
+	
+	
+	
+	// alert(plusminuscount);
+
+	document.getElementById("plusminuscount").innerHTML = plusminuscount;
+}
+function minus() {
+	
+	
+	
+	
+	var plusminuscount = document.getElementById("plusminuscount").innerHTML;
+	
+	if (plusminuscount == "1") {
+		return;
+	}
+	
+	
+	
+	var addcart_preis = document.getElementById("addcart_preis").innerHTML;
+	var addcart_preis = parseFloat(addcart_preis);
+
+	var addcart_preis_start = localStorage.getItem("addcart_preis_start");
+	var addcart_preis_start = parseFloat(addcart_preis_start);
+	var addcart_preis_out = addcart_preis - addcart_preis_start;
+	
+	var addcart_preis_out = addcart_preis_out.toFixed(2);
+
+	document.getElementById("addcart_preis").innerHTML = addcart_preis_out;
+	
+	
+	
+	
+	
+	var plusminuscount = parseInt(plusminuscount);
+	
+	var plusminuscount = plusminuscount - 1;
+	
+	// alert(plusminuscount);
+	
+	document.getElementById("plusminuscount").innerHTML = plusminuscount;
+}
+	
+function additemtoshoppingcart(){
+	
+showloader();
+	
+if("cartid" in localStorage){
+	var cartid = localStorage.getItem("cartid");
+    console.log("Cart ID: "+cartid);
+	additemtodb();
+} else {
+   // alert("Get new Cart ID");
+$.get( "http://curry-masala.de/app_admin/shoppingcart.php?task=cartid", function( cartid ) {
+	console.log("Cart ID: "+cartid);
+	localStorage.setItem("cartid",cartid);
+	additemtodb();
+});
+
+}
+	
+}
+
+function additemtodb(){
+	
+	document.getElementById("navigation_cart_btn").className = "animated fadeIn";
+	document.getElementById("navigation_cart_btn").style.display = "block";
+	
+	var quantity = document.getElementById("plusminuscount").innerHTML;
+	var pricetotal = document.getElementById("addcart_preis").innerHTML;
+	var productid = localStorage.getItem("speise");
+	var speisenname_addcart = localStorage.getItem("speisenname_addcart");
+	
+	var cartid = localStorage.getItem("cartid");
+	
+	// Alle Daten gesammelt, scheibe in Warenkorb
+	
+$.get( "http://curry-masala.de/app_admin/shoppingcart.php?task=additem&cartid="+cartid+"&quantity="+quantity+"&productid="+productid+"&name="+speisenname_addcart+"&pricetotal="+pricetotal+"", function( data ) {
+
+hideloader();
+	
+swal({   
+		title: "Speise hinzugefügt",
+		text: ""+speisenname_addcart+"<br>Anzahl: "+quantity+"<br>Preis: "+pricetotal+"€",
+		type: "info",
+		html: "true",
+		showCancelButton: true,
+		confirmButtonColor: "#EEB147",
+		confirmButtonText: "Zum Warenkorb",
+		cancelButtonColor: "#EEB147",
+		cancelButtonText: "Zurück zur Karte",
+		closeOnConfirm: false
+		},
+     	function (isConfirm) {
+        if (isConfirm) {
+				closecart();
+           		shoppingcart();
+            } else {
+				closecart();
+            }
+});
+	
+});
+	
+}
+function shoppingcart() {
+shoppingcartlist();
+}
+function shoppingcartlist() {
+	
+document.getElementById("checkout").style.display = "none";
+	
+var cartid = localStorage.getItem("cartid");
+	
+$.get( "http://curry-masala.de/app_admin/shoppingcart.php?task=list&cartid="+cartid+"", function( data ) {
+	
+swal.close();
+	
+$.get( "http://curry-masala.de/app_admin/shoppingcart.php?task=total&cartid="+cartid+"", function( preistotal ) {
+
+document.getElementById("shoppingcart").style.display = "block";
+document.body.className = "card";
+document.getElementById("cardcontent").style.display = "none";
+document.getElementById("shoppingcartlist").innerHTML = data;
+	
+//var preistotal = parseInt(preistotal);
+	
+var preistotal = parseFloat(preistotal).toFixed(2);
+var preistotal = preistotal + "€";
+	
+document.getElementById("shoppingcarttotal").innerHTML = preistotal;
+	
+});
+});
+
+}
+function cartremove() {
+
+var eintragid = localStorage.getItem("eintragid");
+
+$.get( "http://curry-masala.de/app_admin/shoppingcart.php?task=remove&eintragid="+eintragid+"", function( data ) {
+	
+	shoppingcart();
+	
+});
+}
+
+
+
+
+
+function sendorder() {
+	
+swal({   
+	title: "Vielen Dank!",
+	text: "Warte auf Bestätigung von Curry Masala.",
+	type: "success",
+	showCancelButton: false,
+	confirmButtonColor: "#EEB147",
+	confirmButtonText: "OK",
+	closeOnConfirm: false
+}, function(){
+	showloader();
+});
+	
+	var vorname = localStorage.getItem("vorname");
+	var nachname = localStorage.getItem("nachname");
+	var strasse = localStorage.getItem("strasse");
+	var telefon = localStorage.getItem("telefon");
+	var email = localStorage.getItem("email");
+	var firma = localStorage.getItem("firma");
+	var plz = localStorage.getItem("plz");
+	var hinweise = localStorage.getItem("hinweise");
+	var shoppingcartid = localStorage.getItem("cartid");
+	
+$.get( "http://curry-masala.de/app_admin/sendorder.php?task=send&vorname="+vorname+"&nachname="+nachname+"&strasse="+strasse+"&telefon="+telefon+"&email="+email+"&firma="+firma+"&plz="+plz+"&hinweise="+hinweise+"&shoppingcartid="+shoppingcartid+"", function( data ) {
+	
+waitconfirm();
+
+});
+	
+}
+
+function waitconfirm() {
+	console.log("Wait Confirm!!!!");
+	
+	setTimeout(function(){ 
+		location.reload();
+	}, 6000);
+}
