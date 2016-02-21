@@ -142,6 +142,8 @@ function payoptions() {
 	var firma = document.getElementById("firma").value; localStorage.setItem("firma",firma);
 	var plz = document.getElementById("plz").value; localStorage.setItem("plz",plz);
 	var hinweise = document.getElementById("hinweise").value; localStorage.setItem("hinweise",hinweise);
+	var liefernoderabholen = document.querySelector('input[name="liefernoderabholen"]:checked').value;
+	localStorage.setItem("liefernoderabholen",liefernoderabholen);
 	
 	$( "#checkout" ).load( "http://curry-masala.de/app_admin/payoptions.php", function() {
   		
@@ -437,9 +439,11 @@ $.get( "http://curry-masala.de/app_admin/shoppingcart.php?task=remove&eintragid=
 
 function sendorder() {
 	
+// text: "Warte auf Bestätigung von Curry Masala.",
+	
 swal({   
 	title: "Vielen Dank!",
-	text: "Warte auf Bestätigung von Curry Masala.",
+	text: "Bestellung wurde an Curry Masala gesendet.",
 	type: "success",
 	showCancelButton: false,
 	confirmButtonColor: "#EEB147",
@@ -449,6 +453,8 @@ swal({
 	showloader();
 });
 	
+	var shoppingcartid = localStorage.getItem("cartid");
+	
 	var vorname = localStorage.getItem("vorname");
 	var nachname = localStorage.getItem("nachname");
 	var strasse = localStorage.getItem("strasse");
@@ -456,10 +462,11 @@ swal({
 	var email = localStorage.getItem("email");
 	var firma = localStorage.getItem("firma");
 	var plz = localStorage.getItem("plz");
-	var hinweise = localStorage.getItem("hinweise");
-	var shoppingcartid = localStorage.getItem("cartid");
+	var hinweise = localStorage.getItem("hinweise");	
+	var liefernoderabholen = localStorage.getItem("liefernoderabholen");
+	var bezahlmethode = localStorage.getItem("payoption");
 	
-$.get( "http://curry-masala.de/app_admin/sendorder.php?task=send&vorname="+vorname+"&nachname="+nachname+"&strasse="+strasse+"&telefon="+telefon+"&email="+email+"&firma="+firma+"&plz="+plz+"&hinweise="+hinweise+"&shoppingcartid="+shoppingcartid+"", function( data ) {
+$.get( "http://curry-masala.de/app_admin/sendorder.php?task=send&vorname="+vorname+"&nachname="+nachname+"&strasse="+strasse+"&telefon="+telefon+"&email="+email+"&firma="+firma+"&plz="+plz+"&hinweise="+hinweise+"&shoppingcartid="+shoppingcartid+"&liefernoderabholen="+liefernoderabholen+"&bezahlmethode="+bezahlmethode+"", function( data ) {
 	
 waitconfirm();
 
@@ -470,7 +477,8 @@ waitconfirm();
 function waitconfirm() {
 	console.log("Wait Confirm!!!!");
 	
-	setTimeout(function(){ 
+	setTimeout(function(){
+		localStorage.removeItem("cartid");
 		location.reload();
 	}, 6000);
 }

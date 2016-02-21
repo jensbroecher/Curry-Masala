@@ -181,6 +181,7 @@ body {
 #shoppingcart {
 
 }
+
 .warenkorbprodukt .warenkorbname, .warenkorbprodukt .warenkorbanzahl, .warenkorbprodukt .warenkorbpreis {
 display: block;
 float: left;
@@ -421,22 +422,19 @@ input{
 	clear: both;
 	padding: 10px;
 	background-color: rgba(255, 255, 255, 0.76);
+	margin-bottom: 5px;
 }
 #terms {
 	clear: both;
 	padding: 10px;
 	background-color: rgba(255, 255, 255, 0.76);
 }
-#terms {
+#liefernoderabholen {
 	clear: both;
 	padding: 10px;
 	background-color: rgba(255, 255, 255, 0.76);
 	margin-bottom: 5px;
-}
-.checkout_checkbox {
-	width: 20px;
-	height: 20px;
-	float: left;
+	font-size: 14px;
 }
 .checkout_input{
 	font-size: 16px;
