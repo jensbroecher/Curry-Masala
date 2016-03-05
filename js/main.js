@@ -449,14 +449,8 @@ function sendorder() {
 		shoppingcarttotal = shoppingcarttotal.substring(0, shoppingcarttotal.length - 1);
 		
 		location.href = "#paypal";
-				
-		var paypalbrowser =	window.open(encodeURI('http://k-rudy.github.io/phonegap-twitter-timeline/?698507348210491392'), '_blank', 'location=no');
 		
-		// var paypalbrowser = window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info@limoria.com&lc=US&item_name=Curry Masala&no_note=1&quantity=1&amount='+shoppingcarttotal+'&currency_code=EUR&bn=BF:btn_donateCC_LG.gif:NonHostedGuest&return=http%3a%2f%2fwww%2enunua%2com%2fwhiskysundays%2fpayok.php&cancel_return=http%3a%2f%2fwww%enunua%2com%2fwhiskysundays%2fpayfail.php&cpp_header_image=http://curry-masala.de/app_admin/paypal.jpg', '_blank', 'location=no', 'toolbar=yes');
-		
-		setTimeout(function(){ 
-		paypalbrowser.close();
-		}, 7000);
+		var paypalbrowser = window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=payment@curry-masala.de&lc=DE&item_name=Curry Masala&no_note=1&quantity=1&amount='+shoppingcarttotal+'&currency_code=EUR&bn=BF:btn_donateCC_LG.gif:NonHostedGuest&return=http://curry-masala.de/app_admin/paypal_ok.php&cancel_return=http://curry-masala.de/app_admin/paypal_cancel.php&cpp_header_image=http://curry-masala.de/app_admin/paypal.jpg', '_blank', 'location=no', 'toolbar=yes');
 		
 	}
 }
