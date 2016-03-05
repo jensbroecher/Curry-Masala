@@ -117,6 +117,8 @@ function checkout() {
 	
 	var shoppingcarttotal = document.getElementById("shoppingcarttotal").innerHTML;
 	
+	localStorage.setItem("shoppingcarttotal",shoppingcarttotal);
+	
 	if (shoppingcarttotal == "0.00€") {
 		sweetAlert("Warenkorb leer", "", "info");
 		closeshoppingcart();
@@ -433,14 +435,44 @@ $.get( "http://curry-masala.de/app_admin/shoppingcart.php?task=remove&eintragid=
 });
 }
 
-
-
-
-
 function sendorder() {
+	var bezahlmethode = localStorage.getItem("payoption");
+	var bezahlmethode = localStorage.getItem("payoption");
 	
-// text: "Warte auf Bestätigung von Curry Masala.",
+	if (bezahlmethode == "Cash") {
+		sendorder_step_2();
+	}
+	if (bezahlmethode == "PayPal") {
+		
+		shoppingcarttotal = localStorage.getItem("shoppingcarttotal");
+		
+		shoppingcarttotal = shoppingcarttotal.substring(0, shoppingcarttotal.length - 1);
+		
+		var paypalbrowser = window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info@limoria.com&lc=US&item_name=Curry Masala&no_note=1&quantity=1&amount='+shoppingcarttotal+'&currency_code=EUR&bn=BF:btn_donateCC_LG.gif:NonHostedGuest&return=http%3a%2f%2fwww%2enunua%2com%2fwhiskysundays%2fpayok.php&cancel_return=http%3a%2f%2fwww%enunua%2com%2fwhiskysundays%2fpayfail.php&cpp_header_image=http://curry-masala.de/app_admin/paypal.jpg', '_blank', 'location=yes');
+	}
+}
+
+function sendorder_step_2() {
 	
+	
+	
+	document.getElementById("waiting_for_confirmation").style.display = "block";
+	
+	swal({   title: "Sende Bestellung",
+		  text: "Bestellung wird an Curry-Masala übermittelt, einen Moment bitte...",
+		  timer: 4000,
+		  showConfirmButton: false
+		 });
+	
+	var shoppingcartid = localStorage.getItem("cartid");
+	
+	$( "#waiting_for_confirmation" ).delay( 1000 ).load( "http://curry-masala.de/app_admin/waiting_for_confirmation.php?shoppingcartid="+shoppingcartid+"", function( data ) {
+  		
+	});
+}
+function sendorder_confirmed() {
+	
+/*
 swal({   
 	title: "Vielen Dank!",
 	text: "Bestellung wurde an Curry Masala gesendet.",
@@ -452,6 +484,7 @@ swal({
 }, function(){
 	showloader();
 });
+*/
 	
 	var shoppingcartid = localStorage.getItem("cartid");
 	
@@ -467,18 +500,7 @@ swal({
 	var bezahlmethode = localStorage.getItem("payoption");
 	
 $.get( "http://curry-masala.de/app_admin/sendorder.php?task=send&vorname="+vorname+"&nachname="+nachname+"&strasse="+strasse+"&telefon="+telefon+"&email="+email+"&firma="+firma+"&plz="+plz+"&hinweise="+hinweise+"&shoppingcartid="+shoppingcartid+"&liefernoderabholen="+liefernoderabholen+"&bezahlmethode="+bezahlmethode+"", function( data ) {
-	
-waitconfirm();
-
+	localStorage.removeItem("cartid");
 });
 	
-}
-
-function waitconfirm() {
-	console.log("Wait Confirm!!!!");
-	
-	setTimeout(function(){
-		localStorage.removeItem("cartid");
-		location.reload();
-	}, 6000);
 }
