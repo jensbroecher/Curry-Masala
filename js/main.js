@@ -452,12 +452,31 @@ function sendorder() {
 		
 		location.href = "#paypal";
 		
-		var paypalbrowser = window.open('http://curry-masala.de/app_admin/paypal_go.php?shoppingcartid='+shoppingcartid+'&shoppingcarttotal='+shoppingcarttotal+'', '_blank', 'location=no', 'toolbar=no');
+		paypalbrowser = window.open('http://curry-masala.de/app_admin/paypal_go.php?shoppingcartid='+shoppingcartid+'&shoppingcarttotal='+shoppingcarttotal+'', '_blank', 'location=no', 'toolbar=no');
+		
+		check_payment_complete();
 		
 		// var paypalbrowser = window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=payment@curry-masala.de&lc=US&item_name=Curry Masala&no_note=1&quantity=1&amount='+shoppingcarttotal+'&currency_code=EUR&bn=BF:btn_donateCC_LG.gif:NonHostedGuest&return=http%3A%2F%2Fcurry-masala.de%2Fapp_admin%2Fpaypal_ok.php&cancel_return=http%3A%2F%2Fcurry-masala.de%2Fapp_admin%2Fpaypal_cancel.php&cpp_header_image=http%3A%2F%2Fcurry-masala.de%2Fapp_admin%2Fpaypal.jpg', '_blank', 'location=no', 'toolbar=no');
 		
 	}
 }
+
+function check_payment_complete() {
+	
+		shoppingcartid = localStorage.getItem("cartid");
+	
+		setTimeout(function(){ 
+		$.get( "http://curry-masala.de/app_admin/paypal_check.php?shoppingcartid="+shoppingcartid+"", function( data ) {
+			if (data == "Yes") {
+				paypalbrowser.close();
+				sendorder_step_2();
+			}
+			else {
+				check_payment_complete();
+			}
+		});
+		}, 3000);
+		}
 
 function sendorder_step_2() {
 	
