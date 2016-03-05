@@ -452,6 +452,12 @@ function sendorder() {
 		
 		var paypalbrowser = window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=payment@curry-masala.de&lc=US&item_name=Curry Masala&no_note=1&quantity=1&amount='+shoppingcarttotal+'&currency_code=EUR&bn=BF:btn_donateCC_LG.gif:NonHostedGuest&return=http%3A%2F%2Fcurry-masala.de%2Fapp_admin%2Fpaypal_ok.php&cancel_return=http%3A%2F%2Fcurry-masala.de%2Fapp_admin%2Fpaypal_cancel.php&cpp_header_image=http%3A%2F%2Fcurry-masala.de%2Fapp_admin%2Fpaypal.jpg', '_blank', 'location=no', 'toolbar=no');
 		
+		var shoppingcartid = localStorage.getItem("cartid");
+		
+		paypalbrowser.addEventListener( "loadstop", function() {
+		paypalbrowser.executeScript({ code: "localStorage.setItem('shoppingcartid','"+shoppingcartid+"');var shoppingcarttotal =  localStorage.getItem('shoppingcartid');alert( shoppingcartid );" });
+});
+		
 	}
 }
 
