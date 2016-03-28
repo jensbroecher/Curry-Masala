@@ -14,10 +14,34 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/sweetalert.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/preventreload.js"></script>
+<script src="js/jquery.touchSwipe.min.js"></script>
 
 </head>
 
 <body class="start">
+	
+<div id="waiting_for_paypal_confirmation">
+	
+<br>
+<img style="width:50%;" src="img/paypal_logo.png">
+<br>
+<br>
+	
+<svg style="width:24px;height:24px;vertical-align:middle;" viewBox="0 0 24 24">
+    <path fill="#000000" d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
+</svg> 
+	
+Warte auf Bestätigung der Zahlung
+	
+<br>
+<br>
+
+<button onclick="reopen_paypal();">PayPal öffnen</button>
+	
+<button onclick="cancel_paypal();">Bestellung abbrechen</button>
+
+</div>
 	
 <div id="transition">
 <div id="loader"></div>
@@ -76,15 +100,14 @@
 
 <div id="account">
 <img id="welcome" src="img/welcome.png">
-<button onclick="card();">Zur Karte</button>
-<button style="display:none;" onclick="card();">Ich bestelle zum ersten Mal</button>
-<button style="display:none;" onclick="signin();">Ich habe bereits bestellt</button>
+<button onclick="card();">Ich bestelle zum ersten Mal</button>
+<button onclick="signin();">Ich habe ein Konto</button>
 </div>
 
 <div id="signin">
-<input placeholder="E-Mail">
-<input type="tel" placeholder="PIN" maxlength="4" pattern=".{4,}">
-<button>OK</button>
+<input id="email" placeholder="E-Mail">
+<input id="pin" type="tel" placeholder="PIN" maxlength="4" pattern=".{4,}">
+<button onclick="signin_check();">OK</button>
 <button onclick="location.reload();">Abbrechen</button>
 </div>
 

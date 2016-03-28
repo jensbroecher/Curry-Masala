@@ -16,7 +16,7 @@ function addcart() {
 	var speise = localStorage.getItem("speise");
 	
 	$("#addcart").load("http://curry-masala.de/app_admin/addcard.php?itemid="+speise+"", function(responseTxt, statusTxt, xhr) {
-    	document.getElementById("addcart").style.height = "50%";
+    	document.getElementById("addcart").style.height = "250px";
 		document.getElementById("addcartbutton").style.height = "50px";
 		document.getElementById("addcartbutton").className = "animated fadeIn";
 		
@@ -75,6 +75,10 @@ function account() {
 }
 function signin() {
 	
+	if("email" in localStorage){
+    document.getElementById("email").value = localStorage.getItem("email");
+	}
+	
 	showloader();
 	
 	setTimeout(function(){ 
@@ -87,8 +91,26 @@ function signin() {
 	hideloader();
 	}, 2000);
 }
+function signin_check() {
+	email = document.getElementById("email").value;
+	pin = document.getElementById("pin").value;
+	
+	$.get( "http://curry-masala.de/app_admin/check_login.php?email="+email+"&pin="+pin+"", function( data ) {
+ 		if (data == "1") {
+			alert("ok");
+		}
+		if (data == "0") {
+			alert("fail");
+		}
+	});
+	
+}
 function closeshoppingcart() {
 	document.getElementById("shoppingcart").style.display = "none";
+	document.getElementById("cardcontent").style.display = "block";
+}
+function closecheckout() {
+	document.getElementById("checkout").style.display = "none";
 	document.getElementById("cardcontent").style.display = "block";
 }
 function card() {
@@ -125,7 +147,6 @@ function checkout() {
 		return;
 	}
 	
-	
 	document.getElementById("shoppingcart").style.display = "none";
 	document.getElementById("checkout").style.display = "block";
 	
@@ -147,6 +168,21 @@ function payoptions() {
 	var liefernoderabholen = document.querySelector('input[name="liefernoderabholen"]:checked').value;
 	localStorage.setItem("liefernoderabholen",liefernoderabholen);
 	
+	
+	var shoppingcarttotalamount = document.getElementById("shoppingcarttotal").innerHTML;	
+	var shoppingcarttotalamount = shoppingcarttotalamount.substring(0, shoppingcarttotalamount.length - 1);
+	var shoppingcarttotalamount = parseInt(shoppingcarttotalamount);
+	
+	if (liefernoderabholen == "Liefern") {
+	if (shoppingcarttotalamount < 10) {
+		sweetAlert("Mindestbestellwert", "Der Mindestbestellwert von 10.00€ wurde noch nicht erreicht.", "info");
+		closeshoppingcart();
+		closecheckout();
+		return;
+	}
+	}
+	
+	
 	$( "#checkout" ).load( "http://curry-masala.de/app_admin/payoptions.php", function() {
   		
 	});
@@ -154,13 +190,20 @@ function payoptions() {
 
     
 $(document).ready(function() {
-	
+
+$("#sidenav").swipe( {
+        swipeLeft:function(event, direction, distance, duration, fingerCount) {
+			closenav();
+        }
+});
+
 	location.href = "#start";
 	
-    var rememberuser = localStorage.getItem('rememberuser');
+    var returning_user = localStorage.getItem('returning_user');
 
-    if (rememberuser == 'Yes') {
-     	location.href = "#karte";  
+    if (returning_user == 'Yes') {
+     	location.href = "#karte";
+		alert("Welcome back!");
     }
     else {
 
@@ -394,6 +437,7 @@ swal({
 	
 }
 function shoppingcart() {
+
 shoppingcartlist();
 }
 function shoppingcartlist() {
@@ -436,7 +480,9 @@ $.get( "http://curry-masala.de/app_admin/shoppingcart.php?task=remove&eintragid=
 }
 
 function sendorder() {
-	var bezahlmethode = localStorage.getItem("payoption");
+	
+	registerorder();
+	
 	var bezahlmethode = localStorage.getItem("payoption");
 	
 	if (bezahlmethode == "Cash") {
@@ -455,40 +501,60 @@ function sendorder() {
 		paypalbrowser = window.open('http://curry-masala.de/app_admin/paypal_go.php?shoppingcartid='+shoppingcartid+'&shoppingcarttotal='+shoppingcarttotal+'', '_blank', 'location=no', 'toolbar=no');
 		
 		check_payment_complete();
-		
-		// var paypalbrowser = window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=payment@curry-masala.de&lc=US&item_name=Curry Masala&no_note=1&quantity=1&amount='+shoppingcarttotal+'&currency_code=EUR&bn=BF:btn_donateCC_LG.gif:NonHostedGuest&return=http%3A%2F%2Fcurry-masala.de%2Fapp_admin%2Fpaypal_ok.php&cancel_return=http%3A%2F%2Fcurry-masala.de%2Fapp_admin%2Fpaypal_cancel.php&cpp_header_image=http%3A%2F%2Fcurry-masala.de%2Fapp_admin%2Fpaypal.jpg', '_blank', 'location=no', 'toolbar=no');
+		document.getElementById("waiting_for_paypal_confirmation").style.display = "block";
 		
 	}
 }
 
+function cancel_paypal() {
+	location.reload();
+}
+
+function reopen_paypal() {
+	
+	shoppingcarttotal = localStorage.getItem("shoppingcarttotal");
+	shoppingcarttotal = shoppingcarttotal.substring(0, shoppingcarttotal.length - 1);
+	shoppingcartid = localStorage.getItem("cartid");
+		
+	location.href = "#paypal";
+		
+	paypalbrowser = window.open('http://curry-masala.de/app_admin/paypal_go.php?shoppingcartid='+shoppingcartid+'&shoppingcarttotal='+shoppingcarttotal+'', '_blank', 'location=no', 'toolbar=no');
+}
+
 function check_payment_complete() {
-	
+
 		shoppingcartid = localStorage.getItem("cartid");
-	
-		setTimeout(function(){ 
+		
+		paypal_checker = setTimeout(function(){ 
 		$.get( "http://curry-masala.de/app_admin/paypal_check.php?shoppingcartid="+shoppingcartid+"", function( data ) {
 			if (data == "Yes") {
 				paypalbrowser.close();
+				document.getElementById("waiting_for_paypal_confirmation").style.display = "none";
 				sendorder_step_2();
+
 			}
 			else {
 				check_payment_complete();
 			}
 		});
-		}, 3000);
+
+			console.log("paypal checker running");
+			
+			
+		}, 2000);
 		}
+		
 
 function sendorder_step_2() {
 	
-	
-	
 	document.getElementById("waiting_for_confirmation").style.display = "block";
 	
-	swal({   title: "Sende Bestellung",
-		  text: "Bestellung wird an Curry-Masala übermittelt, einen Moment bitte...",
-		  timer: 4000,
-		  showConfirmButton: false
-		 });
+	swal({   
+		title: "Etwas Geduld bitte",
+		text: "Bestellung wird an Curry Masala übermittelt, sobald die Bestellung übermittelt wurde erscheint eine Nachricht auf diesem Bildschirm.",
+		timer: 4000,
+		showConfirmButton: false
+		});
 	
 	var shoppingcartid = localStorage.getItem("cartid");
 	
@@ -496,6 +562,29 @@ function sendorder_step_2() {
   		
 	});
 }
+function registerorder() {
+	
+var shoppingcartid = localStorage.getItem("cartid");
+	
+	var vorname = localStorage.getItem("vorname");
+	var nachname = localStorage.getItem("nachname");
+	var strasse = localStorage.getItem("strasse");
+	var telefon = localStorage.getItem("telefon");
+	var email = localStorage.getItem("email");
+	var firma = localStorage.getItem("firma");
+	var plz = localStorage.getItem("plz");
+	var hinweise = localStorage.getItem("hinweise");	
+	var liefernoderabholen = localStorage.getItem("liefernoderabholen");
+	var bezahlmethode = localStorage.getItem("payoption");
+	
+$.get( "http://curry-masala.de/app_admin/sendorder.php?task=send&vorname="+vorname+"&nachname="+nachname+"&strasse="+strasse+"&telefon="+telefon+"&email="+email+"&firma="+firma+"&plz="+plz+"&hinweise="+hinweise+"&shoppingcartid="+shoppingcartid+"&liefernoderabholen="+liefernoderabholen+"&bezahlmethode="+bezahlmethode+"&bestaetigung=No", function( data ) {
+	$.get( "http://curry-masala.de/app_admin/registerorder.php?shoppingcartid="+shoppingcartid+"", function( data ) {
+		localStorage.setItem("returning_user","Yes");
+	});
+});
+
+}
+
 function sendorder_confirmed() {
 	
 /*
@@ -525,8 +614,53 @@ swal({
 	var liefernoderabholen = localStorage.getItem("liefernoderabholen");
 	var bezahlmethode = localStorage.getItem("payoption");
 	
-$.get( "http://curry-masala.de/app_admin/sendorder.php?task=send&vorname="+vorname+"&nachname="+nachname+"&strasse="+strasse+"&telefon="+telefon+"&email="+email+"&firma="+firma+"&plz="+plz+"&hinweise="+hinweise+"&shoppingcartid="+shoppingcartid+"&liefernoderabholen="+liefernoderabholen+"&bezahlmethode="+bezahlmethode+"", function( data ) {
+$.get( "http://curry-masala.de/app_admin/sendorder.php?task=send&vorname="+vorname+"&nachname="+nachname+"&strasse="+strasse+"&telefon="+telefon+"&email="+email+"&firma="+firma+"&plz="+plz+"&hinweise="+hinweise+"&shoppingcartid="+shoppingcartid+"&liefernoderabholen="+liefernoderabholen+"&bezahlmethode="+bezahlmethode+"&bestaetigung=Yes", function( data ) {
 	localStorage.removeItem("cartid");
 });
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ window.addEventListener('load', function() {
+          var maybePreventPullToRefresh = false;
+          var lastTouchY = 0;
+          var touchstartHandler = function(e) {
+            if (e.touches.length != 1) return;
+            lastTouchY = e.touches[0].clientY;
+            // Pull-to-refresh will only trigger if the scroll begins when the
+            // document's Y offset is zero.
+            maybePreventPullToRefresh =
+                window.pageYOffset == 0;
+          }
+
+          var touchmoveHandler = function(e) {
+            var touchY = e.touches[0].clientY;
+            var touchYDelta = touchY - lastTouchY;
+            lastTouchY = touchY;
+
+            if (maybePreventPullToRefresh) {
+              // To suppress pull-to-refresh it is sufficient to preventDefault the
+              // first overscrolling touchmove.
+              maybePreventPullToRefresh = false;
+              if (touchYDelta > 0) {
+                e.preventDefault();
+                return;
+              }
+            }
+          }
+
+          document.addEventListener('touchstart', touchstartHandler, false);
+          document.addEventListener('touchmove', touchmoveHandler, false);      });
