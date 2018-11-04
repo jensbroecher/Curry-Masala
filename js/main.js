@@ -324,7 +324,7 @@ function processHash(hash) {
 
 function share() {
         var the_subject = "Curry Masala Restaurants";
-        var the_message = "Gesund & Lecker";
+        var the_message = "Gesund & Lecker - Jetzt bestellen über unsere eigene Android App - https://curry-masala.de";
         window.plugins.socialsharing.share(the_message, the_subject);
 }
 
