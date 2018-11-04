@@ -1,168 +1,157 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-	
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<link href="css/animate.css" rel="stylesheet" type="text/css">
-<link href="css/main.css" rel="stylesheet" type="text/css">
-<link href="css/loader.css" rel="stylesheet" type="text/css">
-<link href="css/sweetalert.css" rel="stylesheet" type="text/css">
-    
-<script type="text/javascript" src="cordova.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/sweetalert.min.js"></script>
-<script src="js/main.js"></script>
-<script src="js/preventreload.js"></script>
-<script src="js/jquery.touchSwipe.min.js"></script>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/loader.css" rel="stylesheet" type="text/css">
+    <link href="css/ispinner.css" rel="stylesheet" type="text/css">
+    <link href="css/sweetalert.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/preventreload.js"></script>
+    <script src="js/jquery.touchSwipe.min.js"></script>
 
 </head>
 
 <body class="start">
-	
-<div id="waiting_for_paypal_confirmation">
-	
-<br>
-<img style="width:50%;" src="img/paypal_logo.png">
-<br>
-<br>
-	
-<svg style="width:24px;height:24px;vertical-align:middle;" viewBox="0 0 24 24">
+
+    <div id="waiting_for_paypal_confirmation">
+
+        <br>
+        <img style="width:50%;" src="img/paypal_logo.png">
+        <br>
+        <br>
+
+        <svg style="width:24px;height:24px;vertical-align:middle;" viewBox="0 0 24 24">
     <path fill="#000000" d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
-</svg> 
-	
-Warte auf Bestätigung der Zahlung
-	
-<br>
-<br>
+</svg> Warte auf Bestätigung der Zahlung
 
-<button onclick="reopen_paypal();">PayPal öffnen</button>
-	
-<button onclick="cancel_paypal();">Bestellung abbrechen</button>
+        <br>
+        <br>
 
-</div>
-	
-<div id="transition">
-<div id="loader"></div>
-</div>
-	
-<div id="waiting_for_confirmation" class="animated fadeInDown"></div>
-	
-<div id="addcart"></div>
-	
-<div id="card">
+        <button onclick="reopen_paypal();">PayPal öffnen</button>
 
-<div id="navigation">
-	
-<div id="navigation_menu_btn" onclick="opennav();">
-<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <button onclick="cancel_paypal();">Bestellung abbrechen</button>
+
+    </div>
+
+    <div id="transition">
+        <div id="loader"></div>
+    </div>
+
+    <div id="waiting_for_confirmation" class="animated fadeInDown"></div>
+
+    <div id="addcart"></div>
+
+    <div id="card">
+
+        <div id="navigation">
+
+            <div id="navigation_menu_btn" onclick="opennav();">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
     <path fill="#FFFFFF" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
 </svg>
-</div>
-	
-<div id="navigation_menu_btn_close" onclick="closenav();">
-<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            </div>
+
+            <div id="navigation_menu_btn_close" onclick="closenav();">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
     <path fill="#FFFFFF" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
 </svg>
-</div>
+            </div>
 
-<div id="navigation_cart_btn" onclick="shoppingcart();">
-	<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <div id="navigation_cart_btn" onclick="shoppingcart();">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
     <path fill="#FFFFFF" d="M17,18A2,2 0 0,1 19,20A2,2 0 0,1 17,22C15.89,22 15,21.1 15,20C15,18.89 15.89,18 17,18M1,2H4.27L5.21,4H20A1,1 0 0,1 21,5C21,5.17 20.95,5.34 20.88,5.5L17.3,11.97C16.96,12.58 16.3,13 15.55,13H8.1L7.2,14.63L7.17,14.75A0.25,0.25 0 0,0 7.42,15H19V17H7C5.89,17 5,16.1 5,15C5,14.65 5.09,14.32 5.24,14.04L6.6,11.59L3,4H1V2M7,18A2,2 0 0,1 9,20A2,2 0 0,1 7,22C5.89,22 5,21.1 5,20C5,18.89 5.89,18 7,18M16,11L18.78,6H6.14L8.5,11H16Z" />
 </svg>
-</div>
-	
-</div>
-	
-<div id="shoppingcart" class="animated fadeIn">
-<div id="shoppingcartlist">
-	
-</div>		
-</div>	
+            </div>
 
-<div id="cardcontent">
-	
-</div>	
-</div>
-	
-<div id="checkout" class="animated fadeIn"></div>
-	
-<div id="start_overlay" onclick="account();"></div>
-  
-<div id="start_logo_account" class="animated fadeIn" style="-webkit-animation-delay: 1s">
-	
-<div id="logo">
-<img class="animated fadeInLeft" style="-webkit-animation-delay: 2s" id="curry" src="img/curry.png">
-<img class="animated fadeInUp" style="-webkit-animation-delay: 2s" id="masala" src="img/masala.png">
-<img class="animated fadeIn" style="-webkit-animation-delay: 3s" id="fresh_south_indian_kitchen" src="img/fresh_south_indian_kitchen.png">
-</div>
+        </div>
 
-<div id="account">
-<img id="welcome" src="img/welcome.png">
-<button onclick="card();">Ich bestelle zum ersten Mal</button>
-<button onclick="signin();">Ich habe ein Konto</button>
-</div>
+        <div id="shoppingcart" class="animated fadeIn">
+            <div id="shoppingcartlist">
 
-<div id="signin">
-<input id="email" placeholder="E-Mail">
-<input id="pin" type="tel" placeholder="PIN" maxlength="4" pattern=".{4,}">
-<button onclick="signin_check();">OK</button>
-<button onclick="location.reload();">Abbrechen</button>
-</div>
+            </div>
+        </div>
 
-</div>
+        <div id="cardcontent">
 
-<nav id="sidenav">
- 	<div style="display:none;">
-		
-<svg style="width:24px;height:24px;vertical-align:middle;" viewBox="0 0 24 24">
-    <path fill="#FFFFFF" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
-</svg>
-		
-		Konto</div>
-	
-	<div onclick="location.href = 'tel:+4923122390734';">
-		
-<svg style="width:24px;height:24px;vertical-align:middle;" viewBox="0 0 24 24">
-    <path fill="#FFFFFF"  d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" />
-</svg>
-		
+        </div>
+    </div>
 
-		
-		
-		Kontakt</div>
+    <div id="checkout" class="animated fadeIn"></div>
 
-	
-	<div style="display:none;">
-		
-<svg style="width:24px;height:24px;vertical-align:middle;" viewBox="0 0 24 24">
-    <path fill="#FFFFFF"  d="M7,13H21V11H7M7,19H21V17H7M7,7H21V5H7M2,11H3.8L2,13.1V14H5V13H3.2L5,10.9V10H2M3,8H4V4H2V5H3M2,17H4V17.5H3V18.5H4V19H2V20H5V16H2V17Z" />
-</svg>
-		
+    <div id="start_logo_account" class="animated fadeInUp" style="-webkit-animation-delay: 1s">
 
-		
-		
-		Bestellungen</div>
-	<div style="display:none;">
-		
-<svg style="width:24px;height:24px;vertical-align:middle;" viewBox="0 0 24 24">
-    <path fill="#FFFFFF" d="M20,11H4V8H20M20,15H13V13H20M20,19H13V17H20M11,19H4V13H11M20.33,4.67L18.67,3L17,4.67L15.33,3L13.67,4.67L12,3L10.33,4.67L8.67,3L7,4.67L5.33,3L3.67,4.67L2,3V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V3L20.33,4.67Z" />
-</svg> 
+        <div id="logo">
+            <img class="animated fadeInUp" style="-webkit-animation-delay: 1.2s" id="curry" src="img/curry.png">
+            <img class="animated fadeInUp" style="-webkit-animation-delay: 1.3s" id="masala" src="img/masala.png">
 
-Blog</div>
-	<div style="display:none;">
-		
-<svg style="width:24px;height:24px;vertical-align:middle;" viewBox="0 0 24 24">
-    <path fill="#FFFFFF" d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z" />
-</svg> 
-		
-		Teilen</div>
-</nav>
-	
-<div id="navoverlay" onclick="closenav();"></div>
-	
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQfXqX5XPH_gnYGvaLYm4PLh_iaBYEbOk&libraries=places"></script>
+            <div id="gesund_und_lecker"><img style="width: 60%; margin-bottom: 15px;" src="img/gesund_und_lecker.png"></div>
+
+        </div>
+
+        <div id="branch_select">
+
+            <div onclick="account('essen');" id="essen">Essen<br><span style="font-size: 80%">Lieferung & Abholung</div>
+    
+<div onclick="account('dortmund');" id="dortmund">Dortmund<br><span style="font-size: 80%">Nur Abholung</span></div>
+
+        </div>
+
+        <div id="account"></div>
+
+        <div id="signin">
+            <input id="email" placeholder="E-Mail">
+            <input id="pin" type="tel" placeholder="PIN" maxlength="4" pattern=".{4,}">
+            <button onclick="signin_check();">OK</button>
+            <button onclick="location.reload();">Abbrechen</button>
+        </div>
+
+    </div>
+
+    <nav id="sidenav">
+
+        <div onclick="location.href = '#karte';">Speisekarte</div>
+
+        <div onclick="location.href = '#kontakt';">Kontakt</div>
+
+        <div>Teilen</div>
+
+    </nav>
+
+    <div id="navoverlay" onclick="closenav();"></div>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQfXqX5XPH_gnYGvaLYm4PLh_iaBYEbOk&libraries=places"></script>
+
+    <div id="ispinner">
+
+        <div class="ispinner white large animating">
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+            <div class="ispinner-blade"></div>
+        </div>
+
+    </div>
+
+    </div>
 
 </body>
+
 </html>
