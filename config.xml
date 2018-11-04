@@ -3,7 +3,7 @@
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "de.eatfair.currymasala"
         versionCode = "1" 
-        version     = "1.1.0" >
+        version     = "1.2.0" >
 
     <name>Curry Masala</name>
 

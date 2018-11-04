@@ -313,7 +313,55 @@ function processHash(hash) {
         }, "slow");
 
         var data = `
-            test
+<img style="width: 90%; display:block; margin: auto;" src="img/cm new logo 2017.png">
+            <h3 style="color: #DF600A;">Filiale Dortmund<br>+49 231 223 90 734</h3>
+            <h3 style="color: #DF600A;">Filiale Essen<br>+49 201 458 69 204</h3>
+    	`;
+
+        $("#cardcontent").html(data);
+
+    }
+    
+    if (hash == "#allergene") {
+
+        $("html, body").animate({
+            scrollTop: 0
+        }, "slow");
+
+        var data = `
+            
+<div style="color: #DF600A; font-size: 90%; text-align: left; padding-left: 60px; padding-top: 60px;">
+
+1. Farbstoffe
+<br>
+2. Koffeinhaltig
+<br>
+3. Konservierungsstoffe
+<br>
+4. Süßstoffe
+<br>
+5. Antioxidationsmittel
+<br>
+6. Phosphat
+<br>
+7. Phenylalaninquelle
+<br>
+8. Kuhmilch 3.5% Fett
+<br>
+9. Säuerungsmittel
+<br>
+A. enthält Weizen
+<br>
+B. enthält Krebstiere
+<br>
+C. enthält Ei/Eibestandteile
+<br>
+D. enthält Soja
+<br>
+E. enthält Milch/Milchbestandteile
+
+</div>
+            
     	`;
 
         $("#cardcontent").html(data);
